@@ -39,6 +39,7 @@
     <trellis.version>0.9.0-SNAPSHOT</trellis.version>
     <trellisdb.version>0.2.3</trellisdb.version>
     <javaee.version>8.0</javaee.version>
+    <junit.version>5.4.2</junit.version>
 
     <package.name>${project.build.directory}/${project.artifactId}.zip</package.name>
     <package.type>usr</package.type>
@@ -46,6 +47,18 @@
   </properties>
 
   <packaging>war</packaging>
+
+  <repositories>
+    <repository>
+      <id>sonasnap</id>
+      <name>Sonatype Snapshots</name>
+      <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
+      <snapshots>
+        <enabled>true</enabled>
+        <updatePolicy>always</updatePolicy>
+      </snapshots>
+    </repository>
+  </repositories>
 
   <dependencyManagement>
     <dependencies>
@@ -130,6 +143,19 @@
       <version>1.2.3</version>
     </dependency>
 
+    <!-- Testing -->
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter-api</artifactId>
+      <version>${junit.version}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter-engine</artifactId>
+      <version>${junit.version}</version>
+      <scope>test</scope>
+    </dependency>
   </dependencies>
 
   <build>
@@ -175,7 +201,6 @@
           </assemblyArtifact>
           <serverName>test-${project.artifactId}</serverName>
           <stripVersion>true</stripVersion>
-          <configFile>src/main/liberty/config/server.xml</configFile>
           <packageFile>${package.name}</packageFile>
           <include>${package.type}</include>
           <bootstrapProperties>
@@ -229,9 +254,6 @@
             <goals>
               <goal>package-server</goal>
             </goals>
-            <configuration>
-              <outputDirectory>${project.build.directory}/liberty-alt-output-dir</outputDirectory>
-            </configuration>
           </execution>
           <execution>
             <id>test-start-server</id>
@@ -239,6 +261,9 @@
             <goals>
               <goal>test-start-server</goal>
             </goals>
+            <configuration>
+
+            </configuration>
           </execution>
           <execution>
             <id>test-stop-server</id>
@@ -248,56 +273,7 @@
             </goals>
           </execution>
         </executions>
-        <!-- <executions>
-          <execution>
-          <id>package-server</id>
-          <goals>
-          <goal>package-server</goal>
-          </goals>
-          <phase>prepare-package</phase>
 
-          </execution>
-          <execution>
-          <id>start-server</id>
-          <phase>pre-integration-test</phase>
-          <goals>
-          <goal>start-server</goal>
-          </goals>
-          <configuration>
-          <verifyTimeout>60</verifyTimeout>
-          <configFile>${project.build.testOutputDirectory}/wlp/server.xml</configFile>
-          </configuration>
-          </execution>
-
-          <execution>
-          <id>check-liberty-server</id>
-          <phase>pre-integration-test</phase>
-          <goals>
-          <goal>server-status</goal>
-          </goals>
-          </execution>
-          <execution>
-          <id>deploy-app</id>
-          <phase>pre-integration-test</phase>
-          <goals>
-          <goal>deploy</goal>
-          </goals>
-          <configuration>
-          <appArchive>${package.name}</appArchive>
-          <appDeployName>${project.artifactId}</appDeployName>
-          <include>${package.type}</include>
-          <timeout>200</timeout>
-          </configuration>
-          </execution>
-          <execution>
-          <id>stop-server</id>
-          <phase>post-integration-test</phase>
-          <goals>
-          <goal>stop-server</goal>
-          </goals>
-          </execution>
-          </executions>
-        -->
       </plugin>
       <plugin>
         <artifactId>maven-failsafe-plugin</artifactId>
@@ -310,6 +286,7 @@
             </goals>
             <configuration>
               <systemPropertyVariables>
+                <testServerHttpPort>${testServerHttpPort}</testServerHttpPort>
               </systemPropertyVariables>
             </configuration>
           </execution>
