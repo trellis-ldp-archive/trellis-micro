@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<server description="Trellis Test Server">
+
+    <!-- Enable features -->
+    <featureManager>
+        <feature>microProfile-2.2</feature>
+    </featureManager>
+
+</server>
