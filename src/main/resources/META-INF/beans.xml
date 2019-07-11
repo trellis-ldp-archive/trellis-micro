@@ -6,6 +6,5 @@
      <class>org.trellisldp.api.NoopNamespaceService</class>
      <class>org.trellisldp.file.FileMementoService</class>
      <class>org.trellisldp.api.NoopAuditService</class>
-     <class>org.trellisldp.api.NoopAccessControlService</class>
   </alternatives>
 </beans>

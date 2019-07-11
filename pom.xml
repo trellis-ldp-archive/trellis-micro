@@ -101,6 +101,11 @@
     </dependency>
     <dependency>
       <groupId>org.trellisldp</groupId>
+      <artifactId>trellis-webac</artifactId>
+      <version>${trellis.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.trellisldp</groupId>
       <artifactId>trellis-jms</artifactId>
       <version>${trellis.version}</version>
     </dependency>
@@ -193,6 +198,7 @@
         <version>2.6.4</version>
         <extensions>true</extensions>
         <configuration>
+          <assemblyInstallDirectory>${project.build.directory}</assemblyInstallDirectory>
           <assemblyArtifact>
             <groupId>io.openliberty</groupId>
             <artifactId>openliberty-runtime</artifactId>
@@ -221,7 +227,6 @@
             <id>create-server</id>
             <phase>prepare-package</phase>
             <goals>
-              <goal>install-server</goal>
               <goal>create-server</goal>
             </goals>
           </execution>
