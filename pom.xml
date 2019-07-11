@@ -37,7 +37,7 @@
     <maven.compiler.target>1.8</maven.compiler.target>
 
     <trellis.version>0.9.0-SNAPSHOT</trellis.version>
-    <trellisdb.version>0.2.3</trellisdb.version>
+    <trellisdb.version>0.3.0-SNAPSHOT</trellisdb.version>
     <javaee.version>8.0</javaee.version>
     <junit.version>5.4.2</junit.version>
 
@@ -53,6 +53,15 @@
       <id>sonasnap</id>
       <name>Sonatype Snapshots</name>
       <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
+      <snapshots>
+        <enabled>true</enabled>
+        <updatePolicy>always</updatePolicy>
+      </snapshots>
+    </repository>
+    <repository>
+      <id>apache</id>
+      <name>Apache Snapshots</name>
+      <url>https://repository.apache.org/content/repositories/snapshots/</url>
       <snapshots>
         <enabled>true</enabled>
         <updatePolicy>always</updatePolicy>
